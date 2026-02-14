@@ -5,7 +5,7 @@ contract EtherBank {
 
     mapping (address => uint256) public balances;
 
-    function deposit() payable{
+    function deposit() public payable{
         require(msg.value > 0, " Must send ETH");
         balances[msg.sender] += msg.value;
 
@@ -13,7 +13,7 @@ contract EtherBank {
     } 
     function withdraw() public {
         uint256 amount = balances[msg.sender];
-        require(amount > 0, "No balance ")
+        require(amount > 0, "No balance ");
         balances[msg.sender] = 0;
         (bool success,) = msg.sender.call{value: amount } ();
         require(success,"transfer failed");
