@@ -15,12 +15,12 @@ contract EtherBank {
         uint256 amount = balances[msg.sender];
         require(amount > 0, "No balance ");
         balances[msg.sender] = 0;
-        (bool success,) = msg.sender.call{value: amount } ();
+        (bool success,) = msg.sender.call{value: amount } ("");
         require(success,"transfer failed");
 
     }
-    function getContractBalance() public view return (uint256) {
-        
+    function getContractBalance() public view returns (uint256) {
+        return address(this).balance;
     }
      }
 
